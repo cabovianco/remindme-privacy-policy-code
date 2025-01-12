@@ -1,10 +1,11 @@
 package com.cabovianco.remindme.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,64 +14,67 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cabovianco.remindme.theme.background
-import com.cabovianco.remindme.theme.topBar
 
 @Composable
 fun Main(modifier: Modifier = Modifier) {
-    Scaffold(
-        modifier = modifier.fillMaxSize(),
-        topBar = { TopBar() },
-        backgroundColor = background
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(background)
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Content()
+        LazyColumn(
+            modifier = modifier.fillMaxWidth(0.75f)
+        ) {
+            item {
+                Text()
+                MadeBy()
+            }
+        }
     }
-}
-
-@Composable
-private fun TopBar(modifier: Modifier = Modifier) {
-    TopAppBar(
-        modifier = modifier,
-        title = {
-            Text(
-                text = "RemindMe",
-                color = Color.White
-            )
-        },
-        backgroundColor = topBar
-    )
 }
 
 @Composable
 private fun Title(modifier: Modifier = Modifier, title: String) {
     Text(
         text = title,
-        modifier = modifier.padding(horizontal = 16.dp, vertical = 40.dp),
+        modifier = modifier.padding(top = 60.dp, bottom = 40.dp),
         color = Color.White,
-        fontSize = 28.sp,
+        fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
-        lineHeight = 36.sp
+        lineHeight = 38.sp
     )
 }
 
 @Composable
 private fun SubTitle(modifier: Modifier = Modifier, title: String) {
-    Text(
-        text = title,
-        modifier = modifier.padding(top = 40.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
-        color = Color.White,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Medium,
-        lineHeight = 28.sp
-    )
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 48.dp, bottom = 24.dp)
+    ) {
+        Text(
+            text = title,
+            modifier = modifier,
+            color = Color.White,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            lineHeight = 30.sp
+        )
+
+        Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), color = Color.Gray)
+    }
 }
 
 @Composable
 private fun Body(modifier: Modifier = Modifier, body: String) {
     Text(
         text = body,
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier,
         color = Color.White,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+        fontWeight = FontWeight.ExtraLight
     )
 }
 
@@ -167,25 +171,8 @@ private fun MadeBy(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Made by @cabovianco",
-            color = Color.White,
-            fontSize = 14.sp
+            color = Color.Gray,
+            fontSize = 12.sp
         )
-    }
-}
-
-@Composable
-private fun Content(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        LazyColumn(
-            modifier = modifier.fillMaxWidth(0.75f)
-        ) {
-            item {
-                Text()
-                MadeBy()
-            }
-        }
     }
 }
