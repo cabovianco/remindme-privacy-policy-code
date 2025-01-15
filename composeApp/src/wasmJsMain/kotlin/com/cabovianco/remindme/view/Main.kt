@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cabovianco.remindme.theme.background
+import com.cabovianco.remindme.theme.text
 
 @Composable
 fun Main(modifier: Modifier = Modifier) {
@@ -40,7 +40,7 @@ private fun Title(modifier: Modifier = Modifier, title: String) {
     Text(
         text = title,
         modifier = modifier.padding(top = 60.dp, bottom = 40.dp),
-        color = Color.White,
+        color = text,
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
         lineHeight = 38.sp
@@ -52,12 +52,12 @@ private fun SubTitle(modifier: Modifier = Modifier, title: String) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 48.dp, bottom = 24.dp)
+            .padding(top = 64.dp, bottom = 8.dp)
     ) {
         Text(
             text = title,
             modifier = modifier,
-            color = Color.White,
+            color = text,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             lineHeight = 30.sp
@@ -72,7 +72,7 @@ private fun Body(modifier: Modifier = Modifier, body: String) {
     Text(
         text = body,
         modifier = modifier,
-        color = Color.White,
+        color = text,
         fontSize = 14.sp,
         fontWeight = FontWeight.ExtraLight
     )
@@ -86,12 +86,26 @@ private fun Items(modifier: Modifier = Modifier, items: List<String>) {
             .padding(16.dp)
     ) {
         items.forEach {
-            Text(
-                text = "- $it",
-                modifier = Modifier.padding(vertical = 4.dp),
-                color = Color.White,
-                fontSize = 14.sp
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            ) {
+                Text(
+                    text = "●",
+                    color = text,
+                    fontSize = 12.sp
+                )
+
+                Spacer(Modifier.width(8.dp))
+
+                Text(
+                    text = it,
+                    color = text,
+                    fontSize = 14.sp
+                )
+            }
+
         }
     }
 }
